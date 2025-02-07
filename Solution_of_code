@@ -1,0 +1,9 @@
+1.
+
+import pandas as pd
+df = pd.read_csv("cap_rooms.csv") #Loading CSV file
+df_sorted = df.sort_values(by=['pytype','Reviews'], descending=[True, False])  #Sorting the data in descending order
+Rooms=df_sorted.groupby('ptype').head(3)  #Getting te top 3 rooms
+
+import ace_tools as tools
+tools.display_dataframe_to_user(name="Top 3 rooms as per reviews", dataframe=Rooms)
