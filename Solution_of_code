@@ -2,8 +2,39 @@
 
 import pandas as pd
 df = pd.read_csv("cap_rooms.csv") #Loading CSV file
-df_sorted = df.sort_values(by=['pytype','Reviews'], descending=[True, False])  #Sorting the data in descending order
-Rooms=df_sorted.groupby('ptype').head(3)  #Getting te top 3 rooms
+df_sorted = df.sort_values(by=['Ptype','Reviews'], descending=[True, False])  #Sorting the data in descending order
+Rooms=df_sorted.groupby('Ptype').head(3)  #Getting te top 3 rooms
 
+#Display the result
 import ace_tools as tools
 tools.display_dataframe_to_user(name="Top 3 rooms as per reviews", dataframe=Rooms)
+
+
+2.
+
+import pandas as pd
+df=pd.read_csv("cap_rooms.csv")  #Loading the CSV file
+price_data= df.groupby("City")["PPN"].agg(["min", "max"]).reset_index()
+
+#Display the result
+import ace_tools as ace
+tools.display_dataframe_to_user(name="Cheapest and Costliest room prices as per city", dataframe=price_data)
+
+
+3.
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df= pd.read_csv("cap_rooms.csv")
+average_price= df.groupby("City")'["PPN"].mean().reset_index()
+
+#Plotting
+
+plt.figure(figsize=(10,5))
+plt.bar(average_price["City"], average_price["PPN"])
+plt.xlabel("City")
+plt.ylabel("Average Price")
+plt.title("Average room price per city")
+plt.xtcks(rotation=45)
+plt.show()
